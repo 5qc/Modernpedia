@@ -8,3 +8,24 @@ function barScroll() {
   var scrolled = (winScroll / height) * 100;
   document.getElementById("theBar").style.width = scrolled + "%";
 }
+
+// Scrollbar styling
+GM_addStyle (`
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: #ccc;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 10px 0px 30px #ddd;
+  z-index: 99 !important;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #2A4B8D;
+  width: 0%;
+  box-shadow: 10px 0px 30px #ddd;
+}
+`);
