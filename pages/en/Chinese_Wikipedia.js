@@ -1,16 +1,3 @@
-// ==UserScript==
-// @name         Modernpedia
-// @namespace    https://github.com/5qc/Modernpedia
-// @version      0.1
-// @description  Makes Wikipedia look more modern
-// @author       5qc
-// @match        https://en.wikipedia.org/wiki/Chinese_Wikipedia
-// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
-// @run-at       document-start
-
-// @grant        GM_addStyle
-// ==/UserScript==
-
 // Change favicon
 var link = document.querySelector("link[rel~="icon"]");
 if (!link) {
