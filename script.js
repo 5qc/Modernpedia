@@ -9,6 +9,8 @@
 // @run-at       document-start
 
 // @grant        GM_addStyle
+
+// @require      https://raw.githubusercontent.com/5qc/Modernpedia/main/secrets.js
 // ==/UserScript==
 
 // Add JavaScript
@@ -18,6 +20,10 @@ setTimeout(function() {
 
 // Start the main styling
 GM_addStyle (`
+#p-electronpdfservice-sidebar-portlet-heading {
+  display: none !important;
+}
+
 body {
   font-family: 'Roboto', sans-serif !important;
   background: #fff !important;
@@ -46,6 +52,17 @@ td.infobox-full-data .mw-collapsible tr:first-child {
 }
 h2.mw-toc-heading {
   font-size: 20px;
+  font-family: 'Roboto Slab', serif !important;
+}
+
+/* Main Page */
+#mp-tfa-h2, #mp-itn-h2, #mp-otd-h2, #mp-dyk-h2, #mp-tfp-h2, #mp-other, #mp-sister, #mp-lang {
+  border-radius: 10px !important;
+  text-align: center !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+#mp-welcome {
   font-family: 'Roboto Slab', serif !important;
 }
 
@@ -86,12 +103,12 @@ nav#p-namespaces {
 }
 
 #ca-nstab-user, #ca-view, #ca-talk, #ca-unwatch, #ca-nstab-image, #ca-view-foreign, #ca-edit, #ca-watch, #ca-nstab-main, #ca-history, #ca-viewsource, #ca-nstab-project,
-#ca-nstab-special, #ca-nstab-template, #ca-nstab-help, #ca-addsection {
+#ca-nstab-special, #ca-nstab-template, #ca-nstab-help, #ca-addsection, #ca-nstab-category {
   background: #fff !important;
   border-top: 1px solid #ccc !important;
   line-height: 11px !important;
 }
-#ca-nstab-user, #ca-view, #ca-nstab-image, #ca-nstab-main, #ca-nstab-project, #ca-nstab-special, #ca-edit:first-child, #ca-nstab-template, #ca-nstab-help {
+#ca-nstab-user, #ca-view, #ca-nstab-image, #ca-nstab-main, #ca-nstab-project, #ca-nstab-special, #ca-edit:first-child, #ca-nstab-template, #ca-nstab-help, #ca-nstab-category {
   border-left: 1px solid #ccc !important;
 }
 #ca-nstab-special {
@@ -117,11 +134,40 @@ nav#p-namespaces {
   border: 1px solid #ccc !important;
 }
 
-.box-Current, .box-Current_election, .box-Multiple_issues {
+.box-Current, .box-Current_election, .box-Multiple_issues, .ambox-delete, .box-Third-party, .box-Notability, .box-Synthesis, .ambox {
   border-radius: 0px 15px 15px 0px !important;
+  box-shadow: 0px 0px 30px #ddd !important;
+}
+table.infobox, #catlinks, div.navbox, .mbox-small, .toc, div.portal, .wikitable, .thumb.tright, .thumb.tleft, .thumb.tnone .thumbinner, .sidebar, .quotebox, .wikipediauserbox {
+  box-shadow: 0px 0px 30px #ddd !important;
 }
 .mw-normal-catlinks {
   padding-left: 5px;
+}
+
+div.stub[role="note"] {
+  color: #ff1111 !important;
+}
+div.stub[role="note"] a:link, div.stub[role="note"] a:visited {
+  color: #ff1111 !important;
+  text-decoration: underline !important;
+}
+div.stub[role="note"] a:hover {
+  text-decoration: none !important;
+}
+
+kbd.button {
+  cursor: pointer !important;
+  font-family: 'Roboto', sans-serif !important;
+  box-shadow: 0px 0px 15px #ddd !important;
+}
+
+/* Wikitable */
+table.wikitable, table.wikitable tbody {
+  border: none !important;
+}
+table.wikitable th {
+  font-family: 'Roboto Slab', serif !important;
 }
 
 /* Infobox style */
@@ -138,8 +184,11 @@ table.infobox, .toc, .mwe-popups, .mbox-small, #mw-sharedupload, .licensetpl_wra
   background-color: rgba(0,0,0,0) !important;
   color: #000 !important;
 }
-.infobox-header, td.infobox-full-data .mw-collapsible tr:first-child {
+.infobox-header, td.infobox-full-data .mw-collapsible tr:first-child, th[colspan="2"] {
   font-size: 15px !important;
+}
+.infobox-subheader, th[colspan="2"] {
+  font-family: 'Roboto Slab', serif !important;
 }
 
 .mw-body {
@@ -176,134 +225,6 @@ GM_addStyle (`
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #fff !important;
-}
-`)
-
-/* Some secrets */
-// WikiWikiWeb
-GM_addStyle (`
-.page-WikiWikiWeb {
-  background: #fff !important;
-}
-
-.page-WikiWikiWeb #firstHeading {
-  font-weight: 600 !important;
-  border-bottom: 0px solid #000 !important;
-}
-.page-WikiWikiWeb a:link {
-  color: blue !important;
-  text-decoration: none !important;
-}
-.page-WikiWikiWeb a:hover {
-  color: blue !important;
-  text-decoration: none !important;
-}
-.page-WikiWikiWeb a:visited {
-  color: #551A8B !important;
-  text-decoration: none !important;
-}
-.page-WikiWikiWeb a:active {
-  color: #FF0000 !important;
-  text-decoration: none !important;
-}
-
-.page-WikiWikiWeb .mw-body {
-  font-size: 18px !important;
-  width: 33% !important;
-  margin: 0 !important;
-  border: 1px solid #fff !important;
-  box-shadow: 0px 0px 1px #fff !important;
-  line-height: normal !important;
-}
-.page-WikiWikiWeb .content {
-  position: relative !important;
-  bottom: 50px !important;
-}
-
-.page-WikiWikiWeb .mw-headline {
-  font-weight: 600 !important;
-}
-.page-WikiWikiWeb h2 {
-  border: 1px solid #fff !important;
-}
-
-.page-WikiWikiWeb .catlinks {
-  background: rgba(0,0,0,0) !important;
-  border: 1px solid #fff !important;
-}
-
-.page-WikiWikiWeb table, .page-WikiWikiWeb .thumb.tright, .page-WikiWikiWeb .mw-indicators, .page-WikiWikiWeb #mw-head, .page-WikiWikiWeb #siteSub, .page-WikiWikiWeb #toc,
-.page-WikiWikiWeb .mwe-popups, .page-WikiWikiWeb .navbox, .page-WikiWikiWeb a[title="Help:Category"], .page-WikiWikiWeb .noprint {
-  display: none !important;
-}
-.page-WikiWikiWeb, .page-WikiWikiWeb #firstHeading, .page-WikiWikiWeb .mw-headline, .page-WikiWikiWeb .mw-editsection, .page-WikiWikiWeb .reference {
-  font-family: 'Times New Roman', serif !important;
-}
-`)
-
-// Custom Titles
-GM_addStyle (`
-/* Interstate */
-[class^="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject mw-editable page-Interstate_"] h1,
-[class^="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Interstate_"] h1 {
-  font-family: 'Overpass', sans-serif !important;
-}
-`)
-
-// Custom Backgrounds
-GM_addStyle (`
-/** LGBT **/
-.page-LGBT {
-  background-image: linear-gradient(red, orange, yellow, lime, blue, purple) !important;
-  background-attachment: fixed !important;
-}
-.page-Asexuality {
-  background-image: linear-gradient(black, gray, white, purple) !important;
-  background-attachment: fixed !important;
-}
-.page-Pansexuality {
-  background-image: linear-gradient(pink, pink, yellow, lightblue, lightblue) !important;
-  background-attachment: fixed !important;
-}
-.page-Transgender {
-  background-image: linear-gradient(lightblue, pink, white, pink, lightblue) !important;
-  background-attachment: fixed !important;
-}
-
-/** Wikipedia Languages **/
-/* Philippines */
-.page-Cebuano_Wikipedia, .page-Waray_Wikipedia, .page-Tagalog_Wikipedia {
-  background-image: linear-gradient(blue, red) !important;
-  background-attachment: fixed !important;
-}
-
-/* Indonesia & Monaco */
-.page-Javanese_Wikipedia {
-  background-image: linear-gradient(red, white, white) !important;
-  background-attachment: fixed !important;
-}
-
-/* Spain */
-.page-Spanish_Wikipedia {
-  background-image: linear-gradient(red, orange, orange, red) !important;
-  background-attachment: fixed !important;
-}
-
-/* South Africa */
-.page-Afrikaans_Wikipedia {
-  background-image: linear-gradient(red, red, red, red, red, white, green, green, white, blue, blue, blue, blue, blue) !important;
-  background-attachment: fixed !important;
-}
-
-/* India */
-.page-Hindi_Wikipedia {
-  background-image: linear-gradient(orange, white, green) !important;
-  background-attachment: fixed !important;
-}
-
-/** TikTok **/
-.page-TikTok, .page-List_of_most-followed_TikTok_accounts, .page-Censorship_of_TikTok, .page-Donald_Trump–TikTok_controversy {
-  background-image: linear-gradient(90deg, rgba(0,242,234,1) 0%, rgba(0,0,0,1) 50%, rgba(255,0,79,1) 100%) !important;
 }
 `)
 
@@ -568,19 +489,20 @@ GM_addStyle (`
 `);
 
 // ==UserScript==
-// @namespace    https://github.com/5qc/Modernpedia
-// @match        https://en.wikipedia.org/wiki/Chinese_Wikipedia
+// @match        https://en.wikipedia.org/wiki/Google
 // @run-at       document-start
 // @grant        GM_addStyle
 // ==/UserScript==
 
-// Change favicon
+// Change color
 setTimeout(function() {
-  var link = document.querySelector("link[rel~=\"icon\"]");
-  if (!link) {
-    link = document.createElement('link');
-    link.rel = 'icon';
-    document.getElementsByTagName('head')[0].appendChild(link);
-  }
-  link.href = "https://cdn.glitch.com/eb49ccc8-ffaa-44bb-8f04-39053cb25379%2Fcensored%20wikipedia.ico?v=1623106779852";
 }, 0);
+
+GM_addStyle (`
+.page-Google h1.firstHeading::first-letter {
+  color: #4285F4 !important;
+}
+.page-Google h1.firstHeading::last-letter {
+  color: #EA4335 !important;
+}
+`);
