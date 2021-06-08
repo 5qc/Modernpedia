@@ -566,3 +566,21 @@ GM_addStyle (`
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 `);
+
+// ==UserScript==
+// @namespace    https://github.com/5qc/Modernpedia
+// @match        https://en.wikipedia.org/wiki/Chinese_Wikipedia
+// @run-at       document-start
+// @grant        GM_addStyle
+// ==/UserScript==
+
+// Change favicon
+setTimeout(function() {
+  var link = document.querySelector("link[rel~=\"icon\"]");
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = 'icon';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  }
+  link.href = "https://cdn.glitch.com/eb49ccc8-ffaa-44bb-8f04-39053cb25379%2Fcensored%20wikipedia.ico?v=1623106779852";
+}, 0);
