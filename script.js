@@ -4,22 +4,29 @@
 // @version      0.1
 // @description  Makes Wikipedia look more modern
 // @author       5qc
-// @match        https://en.wikipedia.org/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @run-at       document-start
 
 // @grant        GM_addStyle
+// @grant        GM_log
 
 // @require      https://raw.githubusercontent.com/5qc/Modernpedia/main/secrets.js
+
+// @match        https://en.wikipedia.org/*
 // ==/UserScript==
 
 // Add JavaScript
 setTimeout(function() {
-
-}, 0);
+    let addmp = document.getElementsByClassName("vector-menu-content-list")[0];
+    addmp.innerHTML += "<li id=\"pt-mainpage\"><a href=\"/wiki/Main_Page\" data-mw=\"interface\" title=\"Main Page\">Main page</a></li><li id=\"pt-randompage\"><a href=\"/wiki/Special:RandomPage\" data-mw=\"interfacee\" title=\"Random page\">Random page</a>";
+}, 500);
 
 // Start the main styling
 GM_addStyle (`
+#mw-page-base {
+
+}
+
 #p-electronpdfservice-sidebar-portlet-heading {
   display: none !important;
 }
@@ -41,7 +48,7 @@ h1.firstHeading {
   font-weight: 400 !important;
 }
 #contentSub, .mw-headline, #siteSub, .hatnote, .infobox-above, .infobox-title, .infobox-header, .reference, h2, h3, h4, h5, h6,
-td.infobox-full-data .mw-collapsible tr:first-child {
+table.infobox .mw-collapsible tr:first-child {
   font-family: 'Roboto Slab', serif !important;
 }
 .monospaced, code {
@@ -78,9 +85,6 @@ h2.mw-toc-heading {
 nav.vector-menu-tabs {
   border-radius: 15px 15px 0px 0px !important;
 }
-div#p-personal {
-  margin: auto !important;
-}
 nav#p-namespaces {
   margin-right: 75px !important;
 }
@@ -91,11 +95,11 @@ nav#p-namespaces {
 }
 #simpleSearch {
   position: absolute !important;
-  top: 7px !important;
-  left: 420px !important;
+  top: 11px !important;
+  left: 270px !important;
 }
 #searchButton {
-  bottom: 53px !important;
+  margin-bottom: 61px !important;
 }
 .suggestions {
   position: absolute !important;
@@ -132,15 +136,22 @@ nav#p-namespaces {
 #p-personal {
   background: #fff !important;
   border: 1px solid #ccc !important;
-}
+  margin-top: 5px !important;
+  z-index: 98 !important;
+} #right-navigation, #left-navigation, #content, #mw-data-after-content {margin-top:10px;} #right-navigation, #left-navigation {margin-top:50px;}
 
-.box-Current, .box-Current_election, .box-Multiple_issues, .ambox-delete, .box-Third-party, .box-Notability, .box-Synthesis, .ambox {
+.box-Current, .box-Current_election, .box-Multiple_issues, .ambox-delete, .box-Third-party, .box-Notability, .box-Synthesis {
   border-radius: 0px 15px 15px 0px !important;
   box-shadow: 0px 0px 30px #ddd !important;
 }
-table.infobox, #catlinks, div.navbox, .mbox-small, .toc, div.portal, .wikitable, .thumb.tright, .thumb.tleft, .thumb.tnone .thumbinner, .sidebar, .quotebox, .wikipediauserbox {
+table.infobox, #catlinks, div.navbox, .mbox-small, .toc, div.portal, .wikitable, .thumb.tright, .thumb.tleft, .thumb.tnone .thumbinner, .sidebar, .quotebox, .wikipediauserbox,
+.module-shortcutboxplain {
   box-shadow: 0px 0px 30px #ddd !important;
 }
+.plainlinks {
+  box-shadow: 0px 0px 30px #ddd !important;
+}
+
 .mw-normal-catlinks {
   padding-left: 5px;
 }
@@ -160,6 +171,11 @@ kbd.button {
   cursor: pointer !important;
   font-family: 'Roboto', sans-serif !important;
   box-shadow: 0px 0px 15px #ddd !important;
+}
+
+.plainlinks.nourlexpansion {
+  background: rgba(0,0,0,0) !important;
+  box-shadow: none !important;
 }
 
 /* Wikitable */
@@ -184,10 +200,10 @@ table.infobox, .toc, .mwe-popups, .mbox-small, #mw-sharedupload, .licensetpl_wra
   background-color: rgba(0,0,0,0) !important;
   color: #000 !important;
 }
-.infobox-header, td.infobox-full-data .mw-collapsible tr:first-child, th[colspan="2"] {
+.infobox-header, td.infobox-full-data .mw-collapsible tr:first-child {
   font-size: 15px !important;
 }
-.infobox-subheader, th[colspan="2"] {
+.infobox-subheader {
   font-family: 'Roboto Slab', serif !important;
 }
 
@@ -208,7 +224,7 @@ table.infobox, .toc, .mwe-popups, .mbox-small, #mw-sharedupload, .licensetpl_wra
 // Hide stuff
 GM_addStyle (`
 #p-interaction, #p-tb, #p-coll-print_export, #p-wikibase-otherprojects, #p-lang, #p-logo, #n-contents, #n-currentevents, #n-randompage, #n-aboutsite, #n-contactpage,
-#n-sitesupport, #n-mainpage-description {
+#n-sitesupport, #n-mainpage-description, .mw-kartographer-fullScreen {
   display: none !important;
 }
 `)
@@ -488,21 +504,36 @@ GM_addStyle (`
 }
 `);
 
-// ==UserScript==
-// @match        https://en.wikipedia.org/wiki/Google
-// @run-at       document-start
-// @grant        GM_addStyle
-// ==/UserScript==
-
-// Change color
 setTimeout(function() {
-}, 0);
+    let scrollbar = document.getElementsByClassName("mediawiki")[0];
+    scrollbar.innerHTML += "<div class=\"progress-container\"><div class=\"progress-bar\" id=\"theBar\"></div></div>"
+    window.onscroll = function() {barScroll()};
+    function barScroll() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("theBar").style.width = scrolled + "%";
+    }
+}, 500);
 
+// Scrollbar styling
 GM_addStyle (`
-.page-Google h1.firstHeading::first-letter {
-  color: #4285F4 !important;
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: #ccc;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 10px 0px 30px #ddd;
+  z-index: 99 !important;
 }
-.page-Google h1.firstHeading::last-letter {
-  color: #EA4335 !important;
+
+/* The progress bar (scroll indicator) */
+.progress-bar {
+  height: 8px;
+  background: #00FF7F;
+  width: 0%;
+  box-shadow: 10px 0px 30px #ddd;
 }
 `);
