@@ -1,3 +1,10 @@
+// ==UserScript==
+// @namespace    https://github.com/5qc/Modernpedia
+// @match        https://en.wikipedia.org/wiki/Chinese_Wikipedia
+// @run-at       document-start
+// @grant        GM_addStyle
+// ==/UserScript==
+
 // Change favicon
 var link = document.querySelector("link[rel~="icon"]");
 if (!link) {
