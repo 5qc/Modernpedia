@@ -6,17 +6,18 @@
 // @author       5qc
 // @match        https://en.wikipedia.org/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
-// @grant        GM_addStyle
 // @run-at       document-start
+
+// @grant        GM_addStyle
 // ==/UserScript==
+
+// Add JavaScript
+setTimeout(function() {
+
+}, 0);
 
 // Start the main styling
 GM_addStyle (`
-* {
-  margin: 0;
-  padding: 0;
-}
-
 body {
   font-family: 'Roboto', sans-serif !important;
   background: #fff !important;
@@ -25,11 +26,16 @@ code {
   font-size: 13px;
 }
 
+.mw-footer {
+  width: 75% !important;
+  margin: auto !important;
+}
 h1.firstHeading {
   font-family: 'Roboto Slab', serif !important;
   font-weight: 400 !important;
 }
-#contentSub, .mw-headline, #siteSub, .hatnote, .infobox-above, .infobox-title, .infobox-header, .reference, h2, h3, h4, h5, h6 {
+#contentSub, .mw-headline, #siteSub, .hatnote, .infobox-above, .infobox-title, .infobox-header, .reference, h2, h3, h4, h5, h6,
+td.infobox-full-data .mw-collapsible tr:first-child {
   font-family: 'Roboto Slab', serif !important;
 }
 .monospaced, code {
@@ -42,22 +48,12 @@ h2.mw-toc-heading {
   font-size: 20px;
   font-family: 'Roboto Slab', serif !important;
 }
-#searchInput {
-  color: #000 !important;
-  background: #fff !important;
-  border-radius: 5px !important;
-}
 
 /* Top */
 .vector-menu-content-list {
   border-bottom: none !important;
-  margin-top: 1px !important;
+  margin-top: 0px !important;
   margin-right: 80px !important;
-}
-.simpleSearch {
-  position: absolute !important;
-  left: 5px !important;
-  top: 5px !important;
 }
 .noprint {
   background: rgba(0,0,0,0) !important;
@@ -68,25 +64,71 @@ nav.vector-menu-tabs {
 div#p-personal {
   margin: auto !important;
 }
-div#simpleSearch {
-  margin-right: 80px !important;
-}
 nav#p-namespaces {
   margin-right: 75px !important;
 }
-
-.vector-menu-tabs .selected, li {
-  background: rgba(0,0,0,0) !important;
+#searchInput {
+  color: #000 !important;
+  background: #fff !important;
+  border-radius: 5px !important;
 }
-.vector-menu-tabs li a {
-  background-position: none !important;
+#simpleSearch {
+  position: absolute !important;
+  top: 7px !important;
+  left: 420px !important;
+}
+#searchButton {
+  bottom: 53px !important;
+}
+.suggestions {
+  position: absolute !important;
+  top: 35px !important;
+}
+
+#ca-nstab-user, #ca-view, #ca-talk, #ca-unwatch, #ca-nstab-image, #ca-view-foreign, #ca-edit, #ca-watch, #ca-nstab-main, #ca-history, #ca-viewsource, #ca-nstab-project,
+#ca-nstab-special, #ca-nstab-template, #ca-nstab-help, #ca-addsection {
+  background: #fff !important;
+  border-top: 1px solid #ccc !important;
+  line-height: 11px !important;
+}
+#ca-nstab-user, #ca-view, #ca-nstab-image, #ca-nstab-main, #ca-nstab-project, #ca-nstab-special, #ca-edit:first-child, #ca-nstab-template, #ca-nstab-help {
+  border-left: 1px solid #ccc !important;
+}
+#ca-nstab-special {
+  border-right: 1px solid #ccc !important;
+}
+#ca-talk, #ca-unwatch, #ca-watch {
+  border-right: 1px solid #ccc !important;
+} #ca-watch #text {display:none !important;}
+.vector-menu-tabs, .vector-menu-tabs a, #mw-head .vector-menu-dropdown h3 {
+  background-image: none !important;
+}
+#p-cactions {
+  margin-right: 75px !important;
+}
+#p-variants, #p-namespaces {
+  margin-right: 50px !important;
+}
+#left-navigation {
+  margin-left: 81px !important;
+}
+#p-personal {
+  background: #fff !important;
+  border: 1px solid #ccc !important;
+}
+
+.box-Current, .box-Current_election, .box-Multiple_issues {
+  border-radius: 0px 15px 15px 0px !important;
+}
+.mw-normal-catlinks {
+  padding-left: 5px;
 }
 
 /* Infobox style */
 .infobox-title, .infobox-above {
   font-size: 20px !important;
 }
-table.infobox, .toc, .mwe-popups, .mbox-small {
+table.infobox, .toc, .mwe-popups, .mbox-small, #mw-sharedupload, .licensetpl_wrapper, .licensetpl, .catlinks, .warningbox, #noarticletext, #sisterproject {
   border-radius: 10px;
 }
 .thumbinner {
@@ -94,6 +136,10 @@ table.infobox, .toc, .mwe-popups, .mbox-small {
 }
 .infobox-above {
   background-color: rgba(0,0,0,0) !important;
+  color: #000 !important;
+}
+.infobox-header, td.infobox-full-data .mw-collapsible tr:first-child {
+  font-size: 15px !important;
 }
 
 .mw-body {
@@ -101,16 +147,19 @@ table.infobox, .toc, .mwe-popups, .mbox-small {
   width: 86%;
   border: 1px solid #ccc;
   box-shadow: 0px 0px 15px #ccc;
-  border-radius: 15px;
+  border-radius: 0px 0px 15px 15px;
 }
-.mw-footer {
-  background: #fff !important;
+
+/* Editing an Article */
+.ve-ui-toolbar-group-save {
+  border-radius: 15px !important;
 }
 `)
 
 // Hide stuff
 GM_addStyle (`
-#mw-panel {
+#p-interaction, #p-tb, #p-coll-print_export, #p-wikibase-otherprojects, #p-lang, #p-logo, #n-contents, #n-currentevents, #n-randompage, #n-aboutsite, #n-contactpage,
+#n-sitesupport, #n-mainpage-description {
   display: none !important;
 }
 `)
@@ -122,11 +171,11 @@ GM_addStyle (`
 }
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #000 !important;
+  background: #fff !important;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #000 !important;
+  background: #fff !important;
 }
 `)
 
@@ -192,11 +241,32 @@ GM_addStyle (`
 }
 `)
 
+// Custom Titles
+GM_addStyle (`
+/* Interstate */
+[class^="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject mw-editable page-Interstate_"] h1,
+[class^="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Interstate_"] h1 {
+  font-family: 'Overpass', sans-serif !important;
+}
+`)
+
 // Custom Backgrounds
 GM_addStyle (`
-/* LGBT */
+/** LGBT **/
 .page-LGBT {
   background-image: linear-gradient(red, orange, yellow, lime, blue, purple) !important;
+  background-attachment: fixed !important;
+}
+.page-Asexuality {
+  background-image: linear-gradient(black, gray, white, purple) !important;
+  background-attachment: fixed !important;
+}
+.page-Pansexuality {
+  background-image: linear-gradient(pink, pink, yellow, lightblue, lightblue) !important;
+  background-attachment: fixed !important;
+}
+.page-Transgender {
+  background-image: linear-gradient(lightblue, pink, white, pink, lightblue) !important;
   background-attachment: fixed !important;
 }
 
@@ -211,6 +281,42 @@ GM_addStyle (`
 .page-Javanese_Wikipedia {
   background-image: linear-gradient(red, white, white) !important;
   background-attachment: fixed !important;
+}
+
+/* Spain */
+.page-Spanish_Wikipedia {
+  background-image: linear-gradient(red, orange, orange, red) !important;
+  background-attachment: fixed !important;
+}
+
+/* South Africa */
+.page-Afrikaans_Wikipedia {
+  background-image: linear-gradient(red, red, red, red, red, white, green, green, white, blue, blue, blue, blue, blue) !important;
+  background-attachment: fixed !important;
+}
+
+/* India */
+.page-Hindi_Wikipedia {
+  background-image: linear-gradient(orange, white, green) !important;
+  background-attachment: fixed !important;
+}
+
+/** TikTok **/
+.page-TikTok, .page-List_of_most-followed_TikTok_accounts, .page-Censorship_of_TikTok, .page-Donald_Trump–TikTok_controversy {
+  background-image: linear-gradient(90deg, rgba(0,242,234,1) 0%, rgba(0,0,0,1) 50%, rgba(255,0,79,1) 100%) !important;
+}
+`)
+
+// Blocked Article
+GM_addStyle (`
+.page-Murder_of_George_Floyd {
+  background: #ff0000 !important;
+}
+.page-Murder_of_George_Floyd #mw-content-text {
+  content: "This article has been blocked by Modernpedia due to it's graphic nature. If you want to read it, disable Modernpedia.";
+}
+.page-Murder_of_George Floyd .catlinks {
+  display: none !important;
 }
 `)
 
@@ -439,6 +545,24 @@ GM_addStyle (`
   font-weight: 400;
   font-display: swap;
   src: url(https://fonts.gstatic.com/s/rubik/v12/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-B4iFV0U1.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/overpass/v5/qFdH35WCmI96Ajtm81GrU9vyww.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/overpass/v5/qFdH35WCmI96Ajtm81GlU9s.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 `);
